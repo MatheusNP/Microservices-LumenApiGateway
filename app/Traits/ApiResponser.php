@@ -11,11 +11,11 @@ trait ApiResponser
     /**
      * Build success responses;
      *
-     * @param object $data
+     * @param string $data
      * @param integer $code
      * @return Response
      */
-    public function successResponse(object $data, int $code = Response::HTTP_OK): Response
+    public function successResponse(string $data, int $code = Response::HTTP_OK): Response
     {
         return response($data, $code)->header('Content-Type', 'application/json');
     }

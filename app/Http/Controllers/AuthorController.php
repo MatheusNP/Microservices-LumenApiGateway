@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Services\AuthorService;
 use App\Traits\ApiResponser;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -33,30 +32,33 @@ class AuthorController extends Controller
     /**
      * Return the list of authors;
      *
-     * @return JsonResponse
+     * @return Response
      */
-    public function index(): JsonResponse
+    public function index(): Response
     {
+        return $this->successResponse($this->authorService->index());
     }
 
     /**
      * Create a new author;
      *
      * @param Request $request
-     * @return JsonResponse
+     * @return Response
      */
-    public function store(Request $request): JsonResponse
+    public function store(Request $request): Response
     {
+        return $this->successResponse($this->authorService->store($request->all()), Response::HTTP_CREATED);
     }
 
     /**
      * Obtains and show an author;
      *
      * @param integer $id
-     * @return JsonResponse
+     * @return Response
      */
-    public function show(int $id): JsonResponse
+    public function show(int $id): Response
     {
+        return $this->successResponse($this->authorService->show($id));
     }
 
     /**
@@ -64,19 +66,21 @@ class AuthorController extends Controller
      *
      * @param Request $request
      * @param integer $id
-     * @return JsonResponse
+     * @return Response
      */
-    public function update(Request $request, int $id): JsonResponse
+    public function update(Request $request, int $id): Response
     {
+        return $this->successResponse($this->authorService->update($request->all(), $id));
     }
 
     /**
      * Removes an author;
      *
      * @param integer $id
-     * @return JsonResponse
+     * @return Response
      */
-    public function destroy(int $id): JsonResponse
+    public function destroy(int $id): Response
     {
+        return $this->successResponse($this->authorService->destroy($id));
     }
 }
