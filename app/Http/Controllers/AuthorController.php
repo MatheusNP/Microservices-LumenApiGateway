@@ -13,12 +13,21 @@ class AuthorController extends Controller
     use ApiResponser;
 
     /**
+     * The service to consume the author' microservice;
+     *
+     * @var AuthorService
+     */
+    public $authorService;
+
+    /**
      * Create a new controller instance.
      *
+     * @param AuthorService $authorService
      * @return void
      */
-    public function __construct()
+    public function __construct(AuthorService $authorService)
     {
+        $this->authorService = $authorService;
     }
 
     /**

@@ -13,12 +13,21 @@ class BookController extends Controller
     use ApiResponser;
 
     /**
+     * The service to consume the book' microservice;
+     *
+     * @var BookService
+     */
+    public $bookService;
+
+    /**
      * Create a new controller instance.
      *
+     * @param BookService $bookService
      * @return void
      */
-    public function __construct()
+    public function __construct(BookService $bookService)
     {
+        $this->bookService = $bookService;
     }
 
     /**
