@@ -31,6 +31,7 @@ $app->withEloquent();
  * Register config file;
  */
 $app->configure('services');
+$app->configure('auth');
 
 /*
 |--------------------------------------------------------------------------
