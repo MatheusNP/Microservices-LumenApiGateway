@@ -47,7 +47,9 @@ class BookController extends Controller
      */
     public function store(Request $request): Response
     {
-        $this->authorService->show($request->author_id);
+        if ($request->author_id ?? 0) {
+            $this->authorService->show($request->author_id);
+        }
 
         return $this->successResponse($this->bookService->store($request->all()), Response::HTTP_CREATED);
     }
