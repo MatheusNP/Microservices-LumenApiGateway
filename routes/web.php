@@ -13,6 +13,18 @@
 |
 */
 
+$router->group(['prefix' => 'users'], function() use ($router) {
+    $router->post('/login', 'UserController@login');
+
+    /**
+     * User credentials protected routes;
+     */
+    $router->group(['middleware' => 'auth:api'], function() use ($router) {
+        $router->get('/me', 'UserController@me');
+        $router->post('/logout', 'UserController@logout');
+    });
+});
+
 $router->group(['middleware' => 'client.credentials'], function() use ($router) {
     /**
      * Authors' routes
@@ -36,5 +48,17 @@ $router->group(['middleware' => 'client.credentials'], function() use ($router) 
         $router->put('/{id}', 'BookController@update');
         $router->patch('/{id}', 'BookController@update');
         $router->delete('/{id}', 'BookController@destroy');
+    });
+
+    /**
+     * Books' routes
+     */
+    $router->group(['prefix' => 'users'], function() use ($router) {
+        $router->get('/', 'UserController@index');
+        $router->post('/', 'UserController@store');
+        $router->get('/{id}', 'UserController@show');
+        $router->put('/{id}', 'UserController@update');
+        $router->patch('/{id}', 'UserController@update');
+        $router->delete('/{id}', 'UserController@destroy');
     });
 });
